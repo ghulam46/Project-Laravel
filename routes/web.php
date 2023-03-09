@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return view('home');
+    return view('home', [
+        'name' => 'Yanuar Ammar Ghulam',
+        'email' => 'ghulam.123@gmail.com'
+    ]);
 });
 Route::get('/portfolio', function () {
     return view('portfolio');

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Ini Halaman Home</h1>
-    <h2>Ghulam Ammar Yanuar</h2>
-    <h3>ghulam.yanuar01@gmail.com</h3>
+    <h2><?= $name ?></h2>
+    <h3><?= $email ?></h3>
 </body>
 </html>
