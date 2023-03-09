@@ -19,13 +19,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
-        'name' => 'Yanuar Ammar Ghulam',
-        'email' => 'ghulam.123@gmail.com'
+        'title' => 'Home'
     ]);
 });
+
 Route::get('/portfolio', function () {
-    return view('portfolio');
+    return view('portfolio', [
+        'title' => 'Portfolio'
+    ]);
 });
+
 Route::get('/blog', function () {
-    return view('blog');
+
+    $blog_posts = [
+        [
+            'title' => 'Belajar Laravel 8',
+            'author' => 'Doddy',
+            'content' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, aliquam pariatur. Libero voluptates, culpa magni asperiores nihil enim nemo, ab, odio ut dignissimos voluptas. Numquam, alias rerum dicta, velit eaque dolorem accusantium veritatis reprehenderit eligendi optio nulla quaerat voluptatibus nihil aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis?'
+        ],
+        [
+            'title' => 'Belajar React JS',
+            'author' => 'Ammar',
+            'content' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, aliquam pariatur. Libero voluptates, culpa magni asperiores nihil enim nemo, ab, odio ut dignissimos voluptas. Numquam, alias rerum dicta, velit eaque dolorem accusantium veritatis reprehenderit eligendi optio nulla quaerat aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis? voluptatibus nihil aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis?'
+        ]
+    ];
+
+
+    return view('posts', [
+        'title' => 'Blog',
+        'posts' => $blog_posts
+    ]);
 });
