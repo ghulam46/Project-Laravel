@@ -22,21 +22,28 @@ class Post
     public static function all() {
         // pake self karena properti static
         // kalo properti biasa pemanggilannya yaitu $this->blog_posts
-        return self::$blog_posts;
+        // untuk mencari data berdasar slug bisa menggunakan collection pada laravel
+        return collect(self::$blog_posts);
     }
 
     public static function find($slug) {
         // ambil dulu semua post
-        $posts = self::$blog_posts;
+        // $posts = self::$blog_posts;
+
+        // ambil data dari collection all()
+        $posts = static::all();
 
         // mencari data berdasarkan slug
         // looping satu persatu jika slug ketemu dan dimasukkan ke $post
-        $post = [];
-        foreach($posts as $p) {
-            if($p['slug'] === $slug){
-                $post = $p;
-            }
-        }
-        return $post;
+        // $post = [];
+        // foreach($posts as $p) {
+        //     if($p['slug'] === $slug){
+        //         $post = $p;
+        //     }
+        // }
+
+        // menggunakan method pada collection
+        // menggantikan code foreach
+        return $posts -> firstWhere('slug', $slug);
     }
 }
