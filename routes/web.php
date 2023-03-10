@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,57 +31,28 @@ Route::get('/portfolio', function () {
     ]);
 });
 
-Route::get('/blog', function () {
+Route::get('/about', function () {
+    return view('about', [
+        'name' => 'Ghulam Ammar Yanuar',
+        'email' => 'ghulam.yanuar01@gmail.com',
+        'image' => '3x4.png',
+        'title' => 'About'
+    ]);
+});
 
-    $blog_posts = [
-        [
-            'title' => 'Belajar Laravel 8',
-            'slug' => 'belajar-laravel-8',
-            'author' => 'Doddy',
-            'content' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, aliquam pariatur. Libero voluptates, culpa magni asperiores nihil enim nemo, ab, odio ut dignissimos voluptas. Numquam, alias rerum dicta, velit eaque dolorem accusantium veritatis reprehenderit eligendi optio nulla quaerat voluptatibus nihil aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis?'
-        ],
-        [
-            'title' => 'Belajar React JS',
-            'slug' => 'belajar-react-js',
-            'author' => 'Ammar',
-            'content' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, aliquam pariatur. Libero voluptates, culpa magni asperiores nihil enim nemo, ab, odio ut dignissimos voluptas. Numquam, alias rerum dicta, velit eaque dolorem accusantium veritatis reprehenderit eligendi optio nulla quaerat aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis? voluptatibus nihil aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis?'
-        ]
-    ];
-
+Route::get('/posts', function () {
 
     return view('posts', [
         'title' => 'Blog',
-        'posts' => $blog_posts
+        // Post = Model & all() = method
+        'posts' => Post::all()
     ]);
 });
 
 // halaman single post
 Route::get('/post/{slug}', function($slug) {
-
-    $blog_posts = [
-        [
-            'title' => 'Belajar Laravel 8',
-            'slug' => 'belajar-laravel-8',
-            'author' => 'Doddy',
-            'content' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, aliquam pariatur. Libero voluptates, culpa magni asperiores nihil enim nemo, ab, odio ut dignissimos voluptas. Numquam, alias rerum dicta, velit eaque dolorem accusantium veritatis reprehenderit eligendi optio nulla quaerat voluptatibus nihil aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis?'
-        ],
-        [
-            'title' => 'Belajar React JS',
-            'slug' => 'belajar-react-js',
-            'author' => 'Ammar',
-            'content' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, aliquam pariatur. Libero voluptates, culpa magni asperiores nihil enim nemo, ab, odio ut dignissimos voluptas. Numquam, alias rerum dicta, velit eaque dolorem accusantium veritatis reprehenderit eligendi optio nulla quaerat aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis? voluptatibus nihil aperiam quidem nisi expedita eum delectus impedit quod. Dolorum quam, quibusdam sint et natus vel at eius alias? Ducimus, minima. Ducimus soluta officiis architecto earum nostrum ipsa quis. A, neque officia. Culpa accusamus corporis veritatis quae eaque! Odit, tempora facilis?'
-        ]
-    ];
-
-    $new_post = [];
-    foreach($blog_posts as $post) {
-        if($post['slug'] === $slug){
-            $new_post = $post;
-        }
-    }
-
     return view('post', [
         'title' => 'Single Post',
-        'post' => $new_post
+        'post' => Post::find($slug)
     ]);
 });
